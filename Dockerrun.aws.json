@@ -36,7 +36,7 @@
         {
             "name": "redis",
             "image": "redis",
-            "essential": false,
+            "essential": true,
             "memoryReservation": 256,
             "command": ["redis-server", "--requirepass", "${REDIS_PASS}"]
         }
