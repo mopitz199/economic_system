@@ -1,0 +1,44 @@
+{
+    "AWSEBDockerrunVersion": 2,
+    "volumes": [
+        {
+          "name": "home-ec2-user-certs",
+          "host": {
+            "sourcePath": "/home/ec2-user/certs"
+          }
+        },
+        {
+          "name": "home-ec2-user-enviroments",
+          "host": {
+            "sourcePath": "/home/ec2-user/environments"
+          }
+        },
+        {
+          "name": "etc-nginx-vhost-d",
+          "host": {
+            "sourcePath": "/etc/nginx/vhost.d"
+          }
+        },
+        {
+          "name": "usr-share-nginx-html",
+          "host": {
+            "sourcePath": "/usr/share/nginx/html"
+          }
+        },
+        {
+          "name": "var-run-docker-sock",
+          "host": {
+            "sourcePath": "/var/run/docker.sock"
+          }
+        }
+    ],
+    "containerDefinitions": [
+        {
+            "name": "redis",
+            "image": "redis",
+            "essential": false,
+            "memoryReservation": 256,
+            "command": ["redis-server", "--requirepass", "${REDIS_PASS}"]
+        }
+    ]
+}

@@ -12,3 +12,21 @@ after_success:
   - docker push mopitz/backend-app
   - docker push mopitz/backend-nginx
   - docker push mopitz/backend-nginx-proxy
+
+before_deploy:
+  - zip -r economicapp-backend.zip Dockerrun.aws.json .ebextensions
+  - rm Dockerrun.aws.json
+  - rm -R .ebextensions
+
+deploy:
+  provider: elasticbeanstalk
+  region: us-east-1
+  app: economicapp-backend
+  env: EconomicappBackend-env
+  bucket_name: elasticbeanstalk-us-east-1-960622128562
+  zip-file: economicapp-backend.zip
+  skip_cleanup: true
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
