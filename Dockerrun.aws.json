@@ -1,44 +1,83 @@
 {
-    "AWSEBDockerrunVersion": 2,
-    "volumes": [
+  "AWSEBDockerrunVersion": 2,
+  "volumes": [
+    {
+      "name": "home-ec2-user-certs",
+      "host": {
+        "sourcePath": "/home/ec2-user/certs"
+      }
+    },
+    {
+      "name": "home-ec2-user-enviroments",
+      "host": {
+        "sourcePath": "/home/ec2-user/environments"
+      }
+    },
+    {
+      "name": "etc-nginx-vhost-d",
+      "host": {
+        "sourcePath": "/etc/nginx/vhost.d"
+      }
+    },
+    {
+      "name": "usr-share-nginx-html",
+      "host": {
+        "sourcePath": "/usr/share/nginx/html"
+      }
+    },
+    {
+      "name": "var-run-docker-sock",
+      "host": {
+        "sourcePath": "/var/run/docker.sock"
+      }
+    },
+    {
+      "name": "postgres_volume"
+    },
+    {
+      "name": "postgres_volume_backup",
+      "host": {
+        "sourcePath": "/backup"
+      }
+    }
+  ],
+  "containerDefinitions": [
+    {
+      "name": "redis",
+      "image": "redis",
+      "essential": false,
+      "memoryReservation": 256,
+      "command": ["redis-server", "--requirepass", "${REDIS_PASS}"]
+    },
+    {
+      "name": "postgres",
+      "image": "postgres",
+      "essential": false,
+      "memoryReservation": 256,
+      "environment": [
         {
-          "name": "home-ec2-user-certs",
-          "host": {
-            "sourcePath": "/home/ec2-user/certs"
-          }
+          "name": "POSTGRES_DB",
+          "value": "${DATABASE_HOST}"
         },
         {
-          "name": "home-ec2-user-enviroments",
-          "host": {
-            "sourcePath": "/home/ec2-user/environments"
-          }
+          "name": "POSTGRES_USER",
+          "value": "${DATABASE_USER}"
         },
         {
-          "name": "etc-nginx-vhost-d",
-          "host": {
-            "sourcePath": "/etc/nginx/vhost.d"
-          }
-        },
-        {
-          "name": "usr-share-nginx-html",
-          "host": {
-            "sourcePath": "/usr/share/nginx/html"
-          }
-        },
-        {
-          "name": "var-run-docker-sock",
-          "host": {
-            "sourcePath": "/var/run/docker.sock"
-          }
+          "name": "POSTGRES_PASSWORD",
+          "value": "${DATABASE_PASSWORD}"
         }
-    ],
-    "containerDefinitions": [
+      ],
+      "mountPoints": [
         {
-            "name": "redis",
-            "image": "redis",
-            "essential": true,
-            "memoryReservation": 256,
-            "command": ["redis-server", "--requirepass", "${REDIS_PASS}"]
+          "sourceVolume": "postgres_volume",
+          "containerPath": "/var/lib/postgresql/data"
+        },
+        {
+          "sourceVolume": "postgres_volume_backup",
+          "containerPath": "/backups"
         }
-    ]
+      ]
+    }
+  ]
 }
