@@ -1,0 +1,33 @@
+
+PER_HOUR = '1h'
+PER_FOUR_HOURS = '4h'
+PER_DAY = '1d'
+PER_WEEK = '1w'
+PER_MONTH = '1m'
+PER_YEAR = '1y'
+
+CANDLE_CHART_TYPE = 'candle'
+POINT_CHART_TYPE = 'point'
+
+SAVED_CHART_TYPE_CHOICES = [
+    (CANDLE_CHART_TYPE, 'Candle'),
+    (POINT_CHART_TYPE, 'Point'),
+]
+
+AVAILABLE_TIME_FRAMES = [
+    PER_HOUR,
+    PER_FOUR_HOURS,
+    PER_DAY,
+    PER_WEEK,
+    PER_MONTH,
+    PER_YEAR,
+]
+
+
+MILESTONE_CRISIS = 'crisis'
+MILESTONE_ABUNDANCE = 'abundance'
+
+MILESTONE_TYPES = [
+    (MILESTONE_CRISIS, 'Crisis'),
+    (MILESTONE_ABUNDANCE, 'Abundance'),
+]

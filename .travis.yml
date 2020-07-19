@@ -1,0 +1,14 @@
+sudo: required
+language: general
+
+services:
+  - docker
+
+after_success:
+  - docker build -t mopitz/backend-app -f ./dockers/prod/web/Dockerfile .
+  - docker build -t mopitz/backend-nginx -f ./dockers/prod/nginx/Dockerfile .
+  - docker build -t mopitz/backend-nginx-proxy -f ./dockers/prod/nginx-proxy/Dockerfile .
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  - docker push mopitz/backend-app
+  - docker push mopitz/backend-nginx
+  - docker push mopitz/backend-nginx-proxy

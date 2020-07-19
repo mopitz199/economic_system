@@ -1,0 +1,82 @@
+version: '3'
+volumes:
+  pgdata:
+services:
+  redis:
+    image: redis
+    command: redis-server --requirepass ${REDIS_PASS}
+    ports:
+      - '6379:6379'
+  db:
+    build:
+      dockerfile: dockers/dev/postgres/Dockerfile
+      context: .
+    environment:
+      POSTGRES_DB: "${DATABASE_HOST}"
+      POSTGRES_USER: "${DATABASE_USER}"
+      POSTGRES_PASSWORD: "${DATABASE_PASSWORD}"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./backups:/backups
+    ports:
+      - 5435:5432
+  web:
+    build:
+      dockerfile: dockers/dev/web/Dockerfile
+      context: .
+    command: python manage.py runserver 0.0.0.0:9000
+    volumes:
+      - .:/code
+    ports:
+      - "9000:9000"
+    depends_on:
+      - db
+    environment: 
+      AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
+      AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
+      AWS_DEFAULT_REGION: ${AWS_DEFAULT_REGION}
+  celery:
+    build:
+      dockerfile: dockers/dev/web/Dockerfile
+      context: .
+    command: celery -A economic_system worker -l info
+    volumes:
+      - .:/code
+    depends_on:
+      - db
+      - redis
+      - broker
+    environment: 
+      AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
+      AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
+      AWS_DEFAULT_REGION: ${AWS_DEFAULT_REGION}
+  celery-beat:
+    build:
+      dockerfile: dockers/dev/web/Dockerfile
+      context: .
+    command: celery -A economic_system beat -l info --scheduler django_celery_beat.schedulers:DatabaseScheduler
+    volumes:
+      - .:/code
+    depends_on:
+      - db
+      - redis
+      - broker
+    environment: 
+      AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
+      AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
+      AWS_DEFAULT_REGION: ${AWS_DEFAULT_REGION}
+  broker:
+    image: rabbitmq:3
+    ports:
+      - 5672:5672
+  jupyter:
+    build:
+      dockerfile: dockers/dev/jupyter/Dockerfile
+      context: .
+    command: python manage.py shell_plus --notebook
+    volumes:
+      - .:/code
+    ports:
+      - "8888:8888"
+    depends_on:
+      - db

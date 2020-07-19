@@ -1,0 +1,300 @@
+<html>
+  <head>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+    <meta http-equiv="refresh" content="4000" />
+    <style>
+      .container {
+        display: flex;
+      }
+      .num_point_container {
+        /*margin: 0 auto;*/
+        display: flex;
+        flex: 4;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Metrics</h1>
+    <div class='container'>
+      <div class="num_point_container">
+        <canvas id="stocks_chart"></canvas>
+      </div>
+      <div class="num_point_container">
+        <canvas id="futures_chart"></canvas>
+      </div>
+      <div class="num_point_container">
+        <canvas id="currencies_chart"></canvas>
+      </div>
+    </div>
+    <div class='container'>
+      <div class="num_point_container">
+        <canvas id="commodities_chart"></canvas>
+      </div>
+      <div class="num_point_container">
+        <canvas id="etf_chart"></canvas>
+      </div>
+      <div class="num_point_container">
+        <canvas id="cryptos_chart"></canvas>
+      </div>
+    </div>
+    <div class='container'>
+      <div class="num_point_container">
+        <canvas id="index_chart"></canvas>
+      </div>
+      <div class="num_point_container"></div>
+      <div class="num_point_container"></div>
+    </div>
+    
+    <script>
+      var labels = []
+      {% for label in labels %}
+        labels.push("{{label}}")
+      {% endfor %}
+
+      var stocks_data = []
+      {% for value in stocks_chart %}
+        stocks_data.push({{value}})
+      {% endfor %}
+
+      var futures_data = []
+      {% for value in futures_chart %}
+        futures_data.push({{value}})
+      {% endfor %}
+
+      var currencies_data = []
+      {% for value in currencies_chart %}
+        currencies_data.push({{value}})
+      {% endfor %}
+
+      var commodities_data = []
+      {% for value in commodities_chart %}
+        commodities_data.push({{value}})
+      {% endfor %}
+
+      var etf_data = []
+      {% for value in etf_chart %}
+        etf_data.push({{value}})
+      {% endfor %}
+
+      var cryptos_data = []
+      {% for value in cryptos_chart %}
+        cryptos_data.push({{value}})
+      {% endfor %}
+
+      var index_data = []
+      {% for value in index_chart %}
+        index_data.push({{value}})
+      {% endfor %}
+
+      var ctx = document.getElementById('stocks_chart').getContext('2d');
+      var myLineChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: labels,
+          datasets: [
+            {
+              label: 'Stocks',
+              data: stocks_data,
+              backgroundColor: [
+                  'rgba(188, 0, 255, 0.2)',
+              ],
+              borderColor: [
+                  'rgba(188, 0, 255, 1)',
+              ],
+              borderWidth: 1
+            },
+          ]
+        },
+        options: {
+          scales: {
+            yAxes: [{
+              ticks: {
+                beginAtZero: true
+              }
+            }]
+          }
+        }
+      });
+
+      var ctx = document.getElementById('futures_chart').getContext('2d');
+      var myLineChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: labels,
+          datasets: [
+            {
+              label: 'Futures',
+              data: futures_data,
+              backgroundColor: [
+                'rgb(249, 61, 61, 0.2)',
+              ],
+              borderColor: [
+                'rgb(249, 61, 61, 1)',
+              ],
+              borderWidth: 1
+            },
+          ]
+        },
+        options: {
+          scales: {
+            yAxes: [{
+              ticks: {
+                beginAtZero: true
+              }
+            }]
+          }
+        }
+      });
+
+      var ctx = document.getElementById('currencies_chart').getContext('2d');
+      var myLineChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: labels,
+          datasets: [
+            {
+              label: 'Currencies',
+              data: currencies_data,
+              backgroundColor: [
+                'rgb(41, 85, 255, 0.2)',
+              ],
+              borderColor: [
+                'rgb(41, 85, 255, 1)',
+              ],
+              borderWidth: 1
+            },
+          ]
+        },
+        options: {
+          scales: {
+            yAxes: [{
+              ticks: {
+                beginAtZero: true
+              }
+            }]
+          }
+        }
+      });
+
+      var ctx = document.getElementById('commodities_chart').getContext('2d');
+      var myLineChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: labels,
+          datasets: [
+            {
+              label: 'Commodities',
+              data: commodities_data,
+              backgroundColor: [
+                'rgb(42, 193, 232, 0.2)',
+              ],
+              borderColor: [
+                'rgb(42, 193, 232, 1)',
+              ],
+              borderWidth: 1
+            },
+          ]
+        },
+        options: {
+          scales: {
+            yAxes: [{
+              ticks: {
+                beginAtZero: true
+              }
+            }]
+          }
+        }
+      });
+
+      var ctx = document.getElementById('etf_chart').getContext('2d');
+      var myLineChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: labels,
+          datasets: [
+            {
+              label: 'ETF',
+              data: etf_data,
+              backgroundColor: [
+                'rgb(42, 214, 60, 0.2)',
+              ],
+              borderColor: [
+                'rgb(42, 214, 60, 1)',
+              ],
+              borderWidth: 1
+            },
+          ]
+        },
+        options: {
+          scales: {
+            yAxes: [{
+              ticks: {
+                beginAtZero: true
+              }
+            }]
+          }
+        }
+      });
+
+      var ctx = document.getElementById('cryptos_chart').getContext('2d');
+      var myLineChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: labels,
+          datasets: [
+            {
+              label: 'Cryptos',
+              data: cryptos_data,
+              backgroundColor: [
+                'rgb(237, 245, 79, 0.2)',
+              ],
+              borderColor: [
+                'rgb(237, 245, 79, 1)',
+              ],
+              borderWidth: 1
+            },
+          ]
+        },
+        options: {
+          scales: {
+            yAxes: [{
+              ticks: {
+                beginAtZero: true
+              }
+            }]
+          }
+        }
+      });
+
+      var ctx = document.getElementById('index_chart').getContext('2d');
+      var myLineChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: labels,
+          datasets: [
+            {
+              label: 'Index',
+              data: index_data,
+              backgroundColor: [
+                'rgb(255, 118, 0, 0.2)',
+              ],
+              borderColor: [
+                'rgb(255, 118, 0, 1)',
+              ],
+              borderWidth: 1
+            },
+          ]
+        },
+        options: {
+          scales: {
+            yAxes: [{
+              ticks: {
+                beginAtZero: true
+              }
+            }]
+          }
+        }
+      });
+    </script>
+  </body>
+</html>
