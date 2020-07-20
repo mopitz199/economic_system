@@ -91,6 +91,13 @@
           "containerPort": 9000
         }
       ],
+      "mountPoints": [
+        {
+          "sourceVolume": "home-ec2-user-enviroments",
+          "containerPath": "/code",
+          "readOnly": true
+        }
+      ],
       "environment": [
         {
           "name": "AWS_ACCESS_KEY_ID",
