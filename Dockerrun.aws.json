@@ -52,7 +52,7 @@
     {
       "name": "postgres",
       "image": "postgres",
-      "essential": false,
+      "essential": true,
       "memoryReservation": 256,
       "environment": [
         {
