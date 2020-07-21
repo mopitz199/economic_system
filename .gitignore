@@ -1,6 +1,5 @@
 ngrok
 postgres-data
-economic_system/settings/prod.py
 economic_system/debug.log
 backups/
 
