@@ -83,7 +83,7 @@
       "name": "api",
       "image": "mopitz/backend-app",
       "essential": true,
-      "command": ["gunicorn", "-w", "4", "economic_system.wsgi:application", "-b", "0.0.0.0:9000", "--timeout", "1500", "--graceful-timeout", "1500"],
+      "command": ["gunicorn", "-w", "4", "economic_system.wsgi:application", "-b", "0.0.0.0:9000", "--preload", "--timeout", "1500", "--graceful-timeout", "1500"],
       "links": ["db", "redis"],
       "memoryReservation": 1056,
       "portMappings": [
