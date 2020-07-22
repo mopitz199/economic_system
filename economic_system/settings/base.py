@@ -18,7 +18,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Env file
 env = environ.Env()
-env_file = os.path.join(BASE_DIR, "..", ".env")
+env_file = os.path.join(BASE_DIR, "../environments", ".env")
 environ.Env.read_env(env_file)
 
 # Quick-start development settings - unsuitable for production

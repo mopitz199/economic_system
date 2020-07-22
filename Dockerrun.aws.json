@@ -95,7 +95,7 @@
       "mountPoints": [
         {
           "sourceVolume": "home-ec2-user-enviroments",
-          "containerPath": "/code",
+          "containerPath": "/code/environments",
           "readOnly": true
         }
       ],
