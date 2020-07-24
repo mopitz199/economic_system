@@ -208,7 +208,7 @@
     },
     {
       "name": "nginx-proxy",
-      "image": "mopitz/frontend-nginx-proxy",
+      "image": "mopitz/backend-nginx-proxy",
       "essential": true,
       "memoryReservation": 256,
       "dockerLabels": {
