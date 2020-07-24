@@ -39,6 +39,12 @@
       "host": {
         "sourcePath": "/backup"
       }
+    },
+    {
+      "name": "static_files",
+      "host": {
+        "sourcePath": "/static_files"
+      }
     }
   ],
   "containerDefinitions": [
@@ -48,6 +54,11 @@
       "essential": false,
       "memoryReservation": 256,
       "command": ["redis-server", "--requirepass", "${REDIS_PASS}"]
+    },
+    {
+      "name": "broker",
+      "image": "rabbitmq:3",
+      "essential": false
     },
     {
       "name": "db",
@@ -86,12 +97,6 @@
       "command": ["sh", "scripts/api_start_aws.sh"],
       "links": ["db", "redis"],
       "memoryReservation": 1056,
-      "portMappings": [
-        {
-          "hostPort": 80,
-          "containerPort": 9000
-        }
-      ],
       "mountPoints": [
         {
           "sourceVolume": "home-ec2-user-enviroments",
@@ -111,6 +116,168 @@
         {
           "name": "AWS_DEFAULT_REGION",
           "value": "${AWS_DEFAULT_REGION}"
+        }
+      ]
+    },
+    {
+      "name": "celery",
+      "image": "mopitz/backend-app",
+      "essential": false,
+      "command": ["celery", "-A", "economic_system", "worker", "-i"],
+      "links": ["db", "redis", "broker"],
+      "memoryReservation": 1056,
+      "mountPoints": [
+        {
+          "sourceVolume": "home-ec2-user-enviroments",
+          "containerPath": "/code/env",
+          "readOnly": true
+        }
+      ],
+      "environment": [
+        {
+          "name": "AWS_ACCESS_KEY_ID",
+          "value": "${AWS_ACCESS_KEY_ID}"
+        },
+        {
+          "name": "AWS_SECRET_ACCESS_KEY",
+          "value": "${AWS_SECRET_ACCESS_KEY}"
+        },
+        {
+          "name": "AWS_DEFAULT_REGION",
+          "value": "${AWS_DEFAULT_REGION}"
+        }
+      ]
+    },
+    {
+      "name": "celery-beat",
+      "image": "mopitz/backend-app",
+      "essential": false,
+      "command": ["celery", "-A", "economic_system", "beat", "-l", "info", "--scheduler", "django_celery_beat.schedulers:DatabaseScheduler"],
+      "links": ["db", "redis", "broker"],
+      "memoryReservation": 1056,
+      "mountPoints": [
+        {
+          "sourceVolume": "home-ec2-user-enviroments",
+          "containerPath": "/code/env",
+          "readOnly": true
+        }
+      ],
+      "environment": [
+        {
+          "name": "AWS_ACCESS_KEY_ID",
+          "value": "${AWS_ACCESS_KEY_ID}"
+        },
+        {
+          "name": "AWS_SECRET_ACCESS_KEY",
+          "value": "${AWS_SECRET_ACCESS_KEY}"
+        },
+        {
+          "name": "AWS_DEFAULT_REGION",
+          "value": "${AWS_DEFAULT_REGION}"
+        }
+      ]
+    },
+    {
+      "name": "nginx",
+      "image": "mopitz/backend-nginx",
+      "essential": true,
+      "memoryReservation": 128,
+      "mountPoints": [
+        {
+          "sourceVolume": "static_files",
+          "containerPath": "/static_files",
+          "readOnly": true
+        }
+      ],
+      "links": ["api"],
+      "environment": [
+        {
+          "name": "VIRTUAL_HOST",
+          "value": "${VIRTUAL_HOST}"
+        },
+        {
+          "name": "LETSENCRYPT_HOST",
+          "value": "${LETSENCRYPT_HOST}"
+        },
+        {
+          "name": "LETSENCRYPT_EMAIL",
+          "value": "${LETSENCRYPT_EMAIL}"
+        }
+      ]
+    },
+    {
+      "name": "nginx-proxy",
+      "image": "mopitz/frontend-nginx-proxy",
+      "essential": true,
+      "memoryReservation": 128,
+      "dockerLabels": {
+        "com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy": "true"
+      },
+      "links": ["nginx"],
+      "portMappings": [
+        {
+          "containerPort": 80,
+          "hostPort": 80
+        },
+        {
+          "containerPort": 443,
+          "hostPort": 443
+        }
+      ],
+      "mountPoints": [
+        {
+          "sourceVolume": "home-ec2-user-certs",
+          "containerPath": "/etc/nginx/certs",
+          "readOnly": true
+        },
+        {
+          "sourceVolume": "etc-nginx-vhost-d",
+          "containerPath": "/etc/nginx/vhost.d"
+        },
+        {
+          "sourceVolume": "usr-share-nginx-html",
+          "containerPath": "/usr/share/nginx/html"
+        },
+        {
+          "sourceVolume": "var-run-docker-sock",
+          "containerPath": "/tmp/docker.sock",
+          "readOnly": true
+        }
+      ]
+    },
+    {
+      "name": "letsencrypt-nginx-proxy-companion",
+      "image": "jrcs/letsencrypt-nginx-proxy-companion",
+      "essential": false,
+      "memoryReservation": 128,
+      "environment": [
+        {
+          "name": "NGINX_PROXY_CONTAINER",
+          "value": "nginx-proxy"
+        }
+      ],
+      "volumesFrom": [
+        {
+          "sourceContainer": "nginx-proxy"
+        }
+      ],
+      "mountPoints": [
+        {
+          "sourceVolume": "home-ec2-user-certs",
+          "containerPath": "/etc/nginx/certs"
+        },
+        {
+          "sourceVolume": "etc-nginx-vhost-d",
+          "containerPath": "/etc/nginx/vhost.d"
+        },
+        {
+          "sourceVolume": "usr-share-nginx-html",
+          "containerPath": "/usr/share/nginx/html"
+        },
+        {
+          "sourceVolume": "var-run-docker-sock",
+          "containerPath": "/var/run/docker.sock",
+          "readOnly": true
         }
       ]
     }
