@@ -94,7 +94,7 @@
     {
       "name": "celery",
       "image": "mopitz/backend-app",
-      "essential": false,
+      "essential": true,
       "command": ["celery", "-A", "economic_system", "worker"],
       "links": ["db", "redis", "broker"],
       "memoryReservation": 2048,
