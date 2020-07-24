@@ -59,13 +59,13 @@
       "name": "broker",
       "image": "rabbitmq:3",
       "essential": false,
-      "memoryReservation": 128
+      "memoryReservation": 256
     },
     {
       "name": "db",
       "image": "postgres",
       "essential": false,
-      "memoryReservation": 256,
+      "memoryReservation": 512,
       "environment": [
         {
           "name": "POSTGRES_DB",
@@ -97,7 +97,7 @@
       "essential": true,
       "command": ["sh", "scripts/api_start_aws.sh"],
       "links": ["db", "redis"],
-      "memoryReservation": 1056,
+      "memoryReservation": 2048,
       "mountPoints": [
         {
           "sourceVolume": "home-ec2-user-enviroments",
@@ -126,7 +126,7 @@
       "essential": false,
       "command": ["celery", "-A", "economic_system", "worker", "-i"],
       "links": ["db", "redis", "broker"],
-      "memoryReservation": 1056,
+      "memoryReservation": 2048,
       "mountPoints": [
         {
           "sourceVolume": "home-ec2-user-enviroments",
@@ -155,7 +155,7 @@
       "essential": false,
       "command": ["celery", "-A", "economic_system", "beat", "-l", "info", "--scheduler", "django_celery_beat.schedulers:DatabaseScheduler"],
       "links": ["db", "redis", "broker"],
-      "memoryReservation": 1056,
+      "memoryReservation": 2048,
       "mountPoints": [
         {
           "sourceVolume": "home-ec2-user-enviroments",
@@ -182,7 +182,7 @@
       "name": "nginx",
       "image": "mopitz/backend-nginx",
       "essential": true,
-      "memoryReservation": 128,
+      "memoryReservation": 512,
       "mountPoints": [
         {
           "sourceVolume": "static_files",
@@ -210,7 +210,7 @@
       "name": "nginx-proxy",
       "image": "mopitz/frontend-nginx-proxy",
       "essential": true,
-      "memoryReservation": 128,
+      "memoryReservation": 256,
       "dockerLabels": {
         "com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy": "true"
       },
@@ -250,7 +250,7 @@
       "name": "letsencrypt-nginx-proxy-companion",
       "image": "jrcs/letsencrypt-nginx-proxy-companion",
       "essential": false,
-      "memoryReservation": 128,
+      "memoryReservation": 256,
       "environment": [
         {
           "name": "NGINX_PROXY_CONTAINER",
