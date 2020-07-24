@@ -96,7 +96,7 @@
       "image": "mopitz/backend-app",
       "essential": true,
       "command": ["sh", "scripts/api_start_aws.sh"],
-      "links": ["db", "redis"],
+      "links": ["db", "redis", "broker"],
       "memoryReservation": 2048,
       "mountPoints": [
         {
