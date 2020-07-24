@@ -97,7 +97,7 @@
       "essential": true,
       "command": ["sh", "scripts/api_start_aws.sh"],
       "links": ["db", "redis", "broker"],
-      "memoryReservation": 2048,
+      "memoryReservation": 1024,
       "mountPoints": [
         {
           "sourceVolume": "home-ec2-user-enviroments",
@@ -126,7 +126,7 @@
       "essential": true,
       "command": ["celery", "-A", "economic_system", "worker"],
       "links": ["db", "redis", "broker"],
-      "memoryReservation": 2048,
+      "memoryReservation": 1024,
       "mountPoints": [
         {
           "sourceVolume": "home-ec2-user-enviroments",
