@@ -58,7 +58,8 @@
     {
       "name": "broker",
       "image": "rabbitmq:3",
-      "essential": false
+      "essential": false,
+      "memoryReservation": 128
     },
     {
       "name": "db",
