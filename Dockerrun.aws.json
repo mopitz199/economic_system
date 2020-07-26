@@ -69,15 +69,15 @@
       "environment": [
         {
           "name": "POSTGRES_DB",
-          "value": "${DATABASE_HOST}"
+          "value": "economic_system"
         },
         {
           "name": "POSTGRES_USER",
-          "value": "${DATABASE_USER}"
+          "value": "admin"
         },
         {
           "name": "POSTGRES_PASSWORD",
-          "value": "${DATABASE_PASSWORD}"
+          "value": "admin1234"
         }
       ],
       "mountPoints": [
