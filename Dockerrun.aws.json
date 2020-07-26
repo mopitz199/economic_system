@@ -52,20 +52,20 @@
       "name": "redis",
       "image": "redis",
       "essential": false,
-      "memoryReservation": 256,
+      "memoryReservation": 128,
       "command": ["redis-server", "--requirepass", "${REDIS_PASS}"]
     },
     {
       "name": "broker",
       "image": "rabbitmq",
       "essential": false,
-      "memoryReservation": 256
+      "memoryReservation": 128
     },
     {
       "name": "db",
       "image": "postgres",
       "essential": false,
-      "memoryReservation": 512,
+      "memoryReservation": 256,
       "environment": [
         {
           "name": "POSTGRES_DB",
@@ -126,7 +126,7 @@
       "essential": true,
       "command": ["celery", "-A", "economic_system", "worker"],
       "links": ["db", "redis", "broker"],
-      "memoryReservation": 1024,
+      "memoryReservation": 512,
       "mountPoints": [
         {
           "sourceVolume": "home-ec2-user-enviroments",
