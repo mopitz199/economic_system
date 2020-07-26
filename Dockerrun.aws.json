@@ -153,7 +153,7 @@
       "name": "celery-beat",
       "image": "mopitz/backend-app",
       "essential": true,
-      "command": ["celery", "-A", "economic_system", "beat", "-l", "info", "--scheduler", "django_celery_beat.schedulers:DatabaseScheduler"],
+      "command": ["ping", "-d", "google.com"],
       "links": ["db", "redis", "broker"],
       "memoryReservation": 512,
       "mountPoints": [
