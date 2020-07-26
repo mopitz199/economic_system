@@ -65,7 +65,7 @@
       "name": "db",
       "image": "postgres",
       "essential": true,
-      "memoryReservation": 256,
+      "memoryReservation": 512,
       "environment": [
         {
           "name": "POSTGRES_DB",
