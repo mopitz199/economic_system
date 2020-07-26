@@ -119,64 +119,6 @@
           "value": "${AWS_DEFAULT_REGION}"
         }
       ]
-    },
-    {
-      "name": "celery",
-      "image": "mopitz/backend-app",
-      "essential": true,
-      "command": ["celery", "-A", "economic_system", "worker"],
-      "links": ["db", "redis", "broker"],
-      "memoryReservation": 512,
-      "mountPoints": [
-        {
-          "sourceVolume": "home-ec2-user-enviroments",
-          "containerPath": "/code/env",
-          "readOnly": true
-        }
-      ],
-      "environment": [
-        {
-          "name": "AWS_ACCESS_KEY_ID",
-          "value": "${AWS_ACCESS_KEY_ID}"
-        },
-        {
-          "name": "AWS_SECRET_ACCESS_KEY",
-          "value": "${AWS_SECRET_ACCESS_KEY}"
-        },
-        {
-          "name": "AWS_DEFAULT_REGION",
-          "value": "${AWS_DEFAULT_REGION}"
-        }
-      ]
-    },
-    {
-      "name": "celery-beat",
-      "image": "mopitz/backend-app",
-      "essential": true,
-      "command": ["celery", "-A", "economic_system", "beat", "-l", "info", "--scheduler", "django_celery_beat.schedulers:DatabaseScheduler"],
-      "links": ["db", "redis", "broker"],
-      "memoryReservation": 512,
-      "mountPoints": [
-        {
-          "sourceVolume": "home-ec2-user-enviroments",
-          "containerPath": "/code/env",
-          "readOnly": true
-        }
-      ],
-      "environment": [
-        {
-          "name": "AWS_ACCESS_KEY_ID",
-          "value": "${AWS_ACCESS_KEY_ID}"
-        },
-        {
-          "name": "AWS_SECRET_ACCESS_KEY",
-          "value": "${AWS_SECRET_ACCESS_KEY}"
-        },
-        {
-          "name": "AWS_DEFAULT_REGION",
-          "value": "${AWS_DEFAULT_REGION}"
-        }
-      ]
     }
   ]
 }
