@@ -66,20 +66,6 @@
       "image": "postgres",
       "essential": true,
       "memoryReservation": 512,
-      "environment": [
-        {
-          "name": "POSTGRES_DB",
-          "value": "economic_system"
-        },
-        {
-          "name": "POSTGRES_USER",
-          "value": "admin"
-        },
-        {
-          "name": "POSTGRES_PASSWORD",
-          "value": "admin1234"
-        }
-      ],
       "mountPoints": [
         {
           "sourceVolume": "postgres_volume",
