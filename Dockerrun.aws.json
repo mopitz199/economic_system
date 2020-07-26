@@ -76,6 +76,21 @@
           "containerPath": "/backups"
         }
       ]
+    },
+    {
+      "name": "api",
+      "image": "mopitz/backend-app",
+      "essential": true,
+      "command": ["sh", "scripts/api_start_aws.sh"],
+      "links": ["db", "redis", "broker"],
+      "memoryReservation": 1024,
+      "mountPoints": [
+        {
+          "sourceVolume": "home-ec2-user-enviroments",
+          "containerPath": "/code/env",
+          "readOnly": true
+        }
+      ]
     }
   ]
 }
