@@ -53,7 +53,7 @@ def get_price(symbol, proxy, tries=0):
         return None
 
     try:
-        price = content.find('span', {'data-reactid': "14"}).text
+        price = content.find('span', {'data-reactid': "32"}).text
         price = price.replace(",", "").strip()
         price = float(price)
         price = str(price)
