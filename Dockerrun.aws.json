@@ -91,6 +91,21 @@
           "readOnly": true
         }
       ]
+    },
+    {
+      "name": "celery-beat",
+      "image": "mopitz/backend-app",
+      "essential": false,
+      "command": ["celery", "-A", "economic_system", "beat", "-l", "info", "--scheduler", "django_celery_beat.schedulers:DatabaseScheduler"],
+      "links": ["db", "redis", "broker"],
+      "memoryReservation": 512,
+      "mountPoints": [
+        {
+          "sourceVolume": "home-ec2-user-enviroments",
+          "containerPath": "/code/env",
+          "readOnly": true
+        }
+      ]
     }
   ]
 }
