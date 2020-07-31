@@ -101,7 +101,7 @@
       "image": "mopitz/backend-app",
       "hostname": "celery",
       "essential": false,
-      "command": ["celery", "-A", "economic_system", "worker", "-i"],
+      "command": ["ping", "-d", "google.com"],
       "links": ["db", "redis", "broker"],
       "memoryReservation": 512,
       "mountPoints": [
