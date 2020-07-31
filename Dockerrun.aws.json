@@ -51,19 +51,22 @@
     {
       "name": "redis",
       "image": "redis",
+      "hostname": "redis",
       "essential": false,
       "memoryReservation": 256,
-      "command": ["redis-server", "--requirepass", "${REDIS_PASS}"]
+      "command": ["redis-server", "--requirepass", "j3n45kj3n45b34hj5b34"]
     },
     {
       "name": "broker",
       "image": "rabbitmq",
+      "hostname": "broker",
       "essential": false,
       "memoryReservation": 128
     },
     {
       "name": "db",
       "image": "postgres",
+      "hostname": "db",
       "essential": true,
       "memoryReservation": 512,
       "mountPoints": [
@@ -80,6 +83,7 @@
     {
       "name": "api",
       "image": "mopitz/backend-app",
+      "hostname": "api",
       "essential": true,
       "command": ["sh", "scripts/api_start_aws.sh"],
       "links": ["db", "redis", "broker"],
@@ -95,8 +99,9 @@
     {
       "name": "celery",
       "image": "mopitz/backend-app",
+      "hostname": "celery",
       "essential": false,
-      "command": ["ping", "-d", "google.com"],
+      "command": ["celery", "-A", "economic_system", "worker", "-i"],
       "links": ["db", "redis", "broker"],
       "memoryReservation": 512,
       "mountPoints": [
