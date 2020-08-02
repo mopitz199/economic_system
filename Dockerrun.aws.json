@@ -54,7 +54,7 @@
       "hostname": "redis",
       "essential": false,
       "memoryReservation": 256,
-      "command": ["redis-server", "--requirepass", "${REDIS_PASS}"]
+      "command": ["sh", "-c", "redis-server --requirepass $REDIS_PASS"]
     },
     {
       "name": "broker",
