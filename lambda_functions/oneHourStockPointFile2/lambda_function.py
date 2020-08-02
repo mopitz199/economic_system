@@ -46,7 +46,7 @@ def get_price(symbol, proxy, tries=0):
         return None
 
     try:
-        price = content.find('span', {'class': 'Trsdu(0.3s) Fw(b) Fz(36px) Mb(-4px) D(ib)'}).text
+        price = content.find('span', {'class': 'Trsdu(0.3s) Trsdu(0.3s) Fw(b) Fz(36px) Mb(-4px) D(b)'}).text
         price = price.replace(",", "").strip()
         price = float(price)
         price = str(price)
