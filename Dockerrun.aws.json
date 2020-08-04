@@ -150,7 +150,6 @@
       "dockerLabels": {
         "com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy": "true"
       },
-      "links": ["nginx"],
       "portMappings": [
         {
           "containerPort": 80,
