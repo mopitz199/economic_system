@@ -88,6 +88,12 @@
       "command": ["sh", "scripts/api_start_aws.sh"],
       "links": ["db", "redis", "broker"],
       "memoryReservation": 1024,
+      "portMappings": [
+        {
+          "containerPort": 9000,
+          "hostPort": 9000
+        }
+      ],
       "mountPoints": [
         {
           "sourceVolume": "home-ec2-user-enviroments",
