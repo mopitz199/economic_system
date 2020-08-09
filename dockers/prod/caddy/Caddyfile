@@ -1,0 +1,15 @@
+www.aws.economicapp.io {
+    redir https://aws.economicapp.io
+}
+
+aws.economicapp.io {
+    proxy / api:9000 {
+        header_upstream Host {host}
+        header_upstream X-Real-IP {remote}
+        header_upstream X-Forwarded-Proto {scheme}
+        header_upstream X-CSRFToken {~csrftoken}
+    }
+    log stdout
+    errors stdout
+    gzip
+}
