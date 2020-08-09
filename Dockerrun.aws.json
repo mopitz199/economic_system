@@ -157,28 +157,6 @@
         }
       ],
       "links": ["api"]
-    },
-    {
-      "name": "caddy",
-      "image": "mopitz/backend-caddy",
-      "memoryReservation": 256,
-      "links": ["api"],
-      "mountPoints": [
-        {
-          "sourceVolume": "caddy_volume",
-          "containerPath": "/root/.caddy"
-        }
-      ],
-      "portMappings": [
-        {
-          "containerPort": 80,
-          "hostPort": 80
-        },
-        {
-          "containerPort": 443,
-          "hostPort": 443
-        }
-      ]
     }
   ]
 }
