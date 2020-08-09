@@ -147,6 +147,12 @@
           "readOnly": true
         }
       ],
+      "portMappings": [
+        {
+          "containerPort": 80,
+          "hostPort": 8000
+        }
+      ],
       "links": ["api"]
     },
     {
