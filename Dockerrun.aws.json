@@ -41,7 +41,10 @@
       }
     },
     {
-      "name": "caddy_volume"
+      "name": "caddy_volume",
+      "host": {
+        "sourcePath": "/root/.caddy"
+      }
     },
     {
       "name": "static_files",
