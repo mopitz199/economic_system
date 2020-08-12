@@ -1,5 +1,5 @@
 aws.economicapp.io www.aws.economicapp.io {
-    proxy / 50.19.55.238:9000 {
+    proxy / api:9000 {
         header_upstream Host {host}
         header_upstream X-Real-IP {remote}
         header_upstream X-Forwarded-Proto {scheme}
