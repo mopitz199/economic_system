@@ -159,7 +159,7 @@
       "links": ["api"]
     },
     {
-      "name": "abiosoft/caddy",
+      "name": "caddy",
       "image": "mopitz/backend-caddy",
       "memoryReservation": 256,
       "links": ["api"],
