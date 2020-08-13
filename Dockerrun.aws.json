@@ -73,7 +73,7 @@
       "name": "db",
       "image": "postgres",
       "hostname": "db",
-      "essential": true,
+      "essential": false,
       "memoryReservation": 512,
       "mountPoints": [
         {
@@ -90,7 +90,7 @@
       "name": "api",
       "image": "mopitz/backend-app",
       "hostname": "api",
-      "essential": true,
+      "essential": false,
       "command": ["sh", "scripts/api_start_aws.sh"],
       "links": ["db", "redis", "broker"],
       "memoryReservation": 1024,
@@ -144,7 +144,7 @@
       "name": "nginx",
       "image": "mopitz/backend-nginx",
       "hostname": "nginx",
-      "essential": true,
+      "essential": false,
       "memoryReservation": 256,
       "mountPoints": [
         {
@@ -166,6 +166,7 @@
       "image": "mopitz/backend-caddy",
       "memoryReservation": 256,
       "links": ["api"],
+      "essential": true,
       "mountPoints": [
         {
           "sourceVolume": "caddy_volume",
