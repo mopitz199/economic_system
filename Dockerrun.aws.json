@@ -59,7 +59,7 @@
       "image": "redis",
       "hostname": "redis",
       "essential": false,
-      "memoryReservation": 512,
+      "memoryReservation": 256,
       "command": ["sh", "-c", "redis-server --requirepass $REDIS_PASS"]
     },
     {
@@ -74,7 +74,7 @@
       "image": "postgres",
       "hostname": "db",
       "essential": false,
-      "memoryReservation": 512,
+      "memoryReservation": 256,
       "mountPoints": [
         {
           "sourceVolume": "postgres_volume",
@@ -115,7 +115,7 @@
       "essential": false,
       "command": ["celery", "-A", "economic_system", "worker"],
       "links": ["db", "redis", "broker"],
-      "memoryReservation": 512,
+      "memoryReservation": 256,
       "mountPoints": [
         {
           "sourceVolume": "home-ec2-user-enviroments",
@@ -145,7 +145,7 @@
       "image": "mopitz/backend-nginx",
       "hostname": "nginx",
       "essential": false,
-      "memoryReservation": 256,
+      "memoryReservation": 128,
       "mountPoints": [
         {
           "sourceVolume": "static_files",
@@ -164,7 +164,7 @@
     {
       "name": "caddy",
       "image": "mopitz/backend-caddy",
-      "memoryReservation": 256,
+      "memoryReservation": 128,
       "links": ["api"],
       "essential": true,
       "mountPoints": [
