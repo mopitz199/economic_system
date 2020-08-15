@@ -59,7 +59,7 @@
       "image": "redis",
       "hostname": "redis",
       "essential": false,
-      "memoryReservation": 256,
+      "memoryReservation": 56,
       "command": ["sh", "-c", "redis-server --requirepass $REDIS_PASS"]
     },
     {
@@ -74,7 +74,7 @@
       "image": "postgres",
       "hostname": "db",
       "essential": false,
-      "memoryReservation": 256,
+      "memoryReservation": 56,
       "mountPoints": [
         {
           "sourceVolume": "postgres_volume",
@@ -93,7 +93,7 @@
       "essential": false,
       "command": ["sh", "scripts/api_start_aws.sh"],
       "links": ["db", "redis", "broker"],
-      "memoryReservation": 1024,
+      "memoryReservation": 640,
       "portMappings": [
         {
           "containerPort": 9000,
@@ -125,27 +125,11 @@
       ]
     },
     {
-      "name": "celery-beat",
-      "image": "mopitz/backend-app",
-      "hostname": "celery-beat",
-      "essential": false,
-      "command": ["celery", "-A", "economic_system", "beat", "-l", "info", "--scheduler", "django_celery_beat.schedulers:DatabaseScheduler"],
-      "links": ["db", "redis", "broker"],
-      "memoryReservation": 256,
-      "mountPoints": [
-        {
-          "sourceVolume": "home-ec2-user-enviroments",
-          "containerPath": "/code/env",
-          "readOnly": true
-        }
-      ]
-    },
-    {
       "name": "nginx",
       "image": "mopitz/backend-nginx",
       "hostname": "nginx",
       "essential": false,
-      "memoryReservation": 128,
+      "memoryReservation": 56,
       "mountPoints": [
         {
           "sourceVolume": "static_files",
@@ -164,7 +148,7 @@
     {
       "name": "caddy",
       "image": "mopitz/backend-caddy",
-      "memoryReservation": 128,
+      "memoryReservation": 56,
       "links": ["api"],
       "essential": true,
       "mountPoints": [
