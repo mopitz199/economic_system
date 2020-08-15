@@ -10,7 +10,7 @@
     {
       "name": "home-ec2-user-enviroments",
       "host": {
-        "sourcePath": "/home/ec2-user/environments"
+        "sourcePath": "/efs/environments"
       }
     },
     {

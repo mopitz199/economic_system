@@ -1,4 +1,4 @@
-aws.economicapp.io www.aws.economicapp.io {
+eb.economicapp.io www.eb.economicapp.io {
     proxy / api:9000 {
         header_upstream Host {host}
         header_upstream X-Real-IP {remote}
