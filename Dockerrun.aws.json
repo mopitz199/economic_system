@@ -114,7 +114,7 @@
       "hostname": "celery",
       "essential": false,
       "command": ["celery", "-A", "economic_system", "worker"],
-      "links": ["redis", "broker"],
+      "links": ["db", "redis", "broker"],
       "memoryReservation": 256,
       "mountPoints": [
         {
@@ -130,7 +130,7 @@
       "hostname": "celery-beat",
       "essential": false,
       "command": ["celery", "-A", "economic_system", "beat", "-l", "info", "--scheduler", "django_celery_beat.schedulers:DatabaseScheduler"],
-      "links": ["redis", "broker"],
+      "links": ["db", "redis", "broker"],
       "memoryReservation": 256,
       "mountPoints": [
         {
