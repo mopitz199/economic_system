@@ -2,33 +2,9 @@
   "AWSEBDockerrunVersion": 2,
   "volumes": [
     {
-      "name": "home-ec2-user-certs",
-      "host": {
-        "sourcePath": "/home/ec2-user/certs"
-      }
-    },
-    {
       "name": "home-ec2-user-enviroments",
       "host": {
         "sourcePath": "/efs/environments"
-      }
-    },
-    {
-      "name": "etc-nginx-vhost-d",
-      "host": {
-        "sourcePath": "/etc/nginx/vhost.d"
-      }
-    },
-    {
-      "name": "usr-share-nginx-html",
-      "host": {
-        "sourcePath": "/usr/share/nginx/html"
-      }
-    },
-    {
-      "name": "var-run-docker-sock",
-      "host": {
-        "sourcePath": "/var/run/docker.sock"
       }
     },
     {
