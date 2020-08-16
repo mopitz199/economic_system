@@ -8,12 +8,15 @@
       }
     },
     {
-      "name": "postgres_volume"
+      "name": "postgres_volume",
+      "host": {
+        "sourcePath": "/efs/postgresql/data"
+      }
     },
     {
       "name": "postgres_volume_backup",
       "host": {
-        "sourcePath": "/backup"
+        "sourcePath": "/efs/backups"
       }
     },
     {
