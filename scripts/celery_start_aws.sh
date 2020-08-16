@@ -1,4 +1,5 @@
 #!/bin/bash
 
-sleep 2m
+python manage.py migrate postgres_extensions
+python manage.py migrate
 celery -A economic_system worker
