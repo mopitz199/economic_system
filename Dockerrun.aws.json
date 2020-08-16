@@ -89,7 +89,7 @@
       "image": "mopitz/backend-app",
       "hostname": "celery",
       "essential": false,
-      "command": ["sh", "celery_start_aws.sh"],
+      "command": ["sh", "scripts/celery_start_aws.sh"],
       "links": ["db", "redis", "broker"],
       "memoryReservation": 256,
       "mountPoints": [
@@ -105,7 +105,7 @@
       "image": "mopitz/backend-app",
       "hostname": "celery-beat",
       "essential": false,
-      "command": ["sh", "celery_beat_start_aws.sh"],
+      "command": ["sh", "scripts/celery_beat_start_aws.sh"],
       "links": ["db", "redis", "broker"],
       "memoryReservation": 256,
       "mountPoints": [
