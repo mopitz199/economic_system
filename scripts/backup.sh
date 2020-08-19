@@ -5,7 +5,6 @@ timestamp() {
 }
 
 postgres_container_id=$(docker ps | grep 'postgres' | awk '{ print $1 }')
-web_container_id=$(docker ps | grep 'web' | awk '{ print $1 }')
 
 cd /efs/
 
