@@ -20,12 +20,6 @@
       }
     },
     {
-      "name": "api-scripts",
-      "host": {
-        "sourcePath": "/efs/scripts"
-      }
-    },
-    {
       "name": "caddy_volume",
       "host": {
         "sourcePath": "/root/.caddy"
@@ -89,11 +83,6 @@
         {
           "sourceVolume": "home-ec2-user-enviroments",
           "containerPath": "/code/env",
-          "readOnly": true
-        },
-        {
-          "sourceVolume": "api-scripts",
-          "containerPath": "/code/scripts",
           "readOnly": true
         }
       ]
