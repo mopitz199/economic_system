@@ -39,7 +39,7 @@
       "hostname": "redis",
       "essential": false,
       "memoryReservation": 56,
-      "command": ["sh", "-c", "redis-server --requirepass $REDIS_PASS"]
+      "command": ["sh", "-c", "redis-server -p $REDIS_PORT --requirepass $REDIS_PASS"]
     },
     {
       "name": "broker",
@@ -135,7 +135,7 @@
       "portMappings": [
         {
           "containerPort": 80,
-          "hostPort": "${NGINX_HOST_PORT}"
+          "hostPort": 8000
         }
       ],
       "links": ["api"]
