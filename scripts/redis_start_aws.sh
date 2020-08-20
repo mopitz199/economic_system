@@ -1,3 +1,3 @@
 #!/bin/bash
 
-redis-server --requirepass ${REDIS_PASS}
+redis-server --requirepass $REDIS_PASS

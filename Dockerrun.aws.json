@@ -38,8 +38,8 @@
       "image": "redis",
       "hostname": "redis",
       "essential": false,
-      "memoryReservation": 56,
-      "command": ["sh", "-c", "redis-server --port $REDIS_PORT --requirepass $REDIS_PASS"]
+      "memoryReservation": 128,
+      "command": ["sh", "scripts/redis_start_aws.sh"]
     },
     {
       "name": "broker",
