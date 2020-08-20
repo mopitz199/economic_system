@@ -39,7 +39,7 @@
       "hostname": "redis",
       "essential": false,
       "memoryReservation": 56,
-      "command": ["sh", "-c", "redis-server -p $REDIS_PORT --requirepass $REDIS_PASS"]
+      "command": ["sh", "-c", "redis-server --port $REDIS_PORT --requirepass $REDIS_PASS"]
     },
     {
       "name": "broker",
