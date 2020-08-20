@@ -135,7 +135,7 @@
       "portMappings": [
         {
           "containerPort": 80,
-          "hostPort": "$NGINX_HOST_PORT"
+          "hostPort": "${NGINX_HOST_PORT}"
         }
       ],
       "links": ["api"]
