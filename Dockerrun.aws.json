@@ -39,7 +39,7 @@
       "hostname": "redis",
       "essential": false,
       "memoryReservation": 128,
-      "command": ["sh", "scripts/redis_start_aws.sh"]
+      "command": ["sh", "-c", "redis-server --requirepass $REDIS_PASS"]
     },
     {
       "name": "broker",
