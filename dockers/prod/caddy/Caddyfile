@@ -1,4 +1,4 @@
-eb.economicapp.io www.eb.economicapp.io {
+${DOMAIN_NAME} www.${DOMAIN_NAME} {
     proxy / api:9000 {
         header_upstream Host {host}
         header_upstream X-Real-IP {remote}
