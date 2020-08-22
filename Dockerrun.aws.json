@@ -39,7 +39,7 @@
       "hostname": "redis",
       "essential": false,
       "memoryReservation": 128,
-      "command": ["sh", "starts.sh"]
+      "command": ["sh", "start.sh"]
     },
     {
       "name": "broker",
