@@ -35,11 +35,11 @@
   "containerDefinitions": [
     {
       "name": "redis",
-      "image": "redis",
+      "image": "mopitz/backend-redis",
       "hostname": "redis",
       "essential": false,
       "memoryReservation": 128,
-      "command": ["sh", "-c", "redis-server --requirepass $REDIS_PASS"]
+      "command": ["sh", "starts.sh"]
     },
     {
       "name": "broker",
