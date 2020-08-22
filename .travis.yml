@@ -15,6 +15,7 @@ after_success:
   - docker push mopitz/backend-nginx
   - docker push mopitz/backend-nginx-proxy
   - docker push mopitz/backend-caddy
+  - docker push mopitz/backend-redis
 
 before_deploy:
   - zip -r economicapp-backend.zip Dockerrun.aws.json .ebextensions
