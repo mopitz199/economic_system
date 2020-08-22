@@ -2,9 +2,9 @@
   "AWSEBDockerrunVersion": 2,
   "volumes": [
     {
-      "name": "home-ec2-user-enviroments",
+      "name": "enviroments_volume",
       "host": {
-        "sourcePath": "/efs/environments"
+        "sourcePath": "/efs/envs"
       }
     },
     {
@@ -81,8 +81,8 @@
       ],
       "mountPoints": [
         {
-          "sourceVolume": "home-ec2-user-enviroments",
-          "containerPath": "/code/env",
+          "sourceVolume": "enviroments_volume",
+          "containerPath": "/code/envs",
           "readOnly": true
         }
       ]
@@ -97,8 +97,8 @@
       "memoryReservation": 256,
       "mountPoints": [
         {
-          "sourceVolume": "home-ec2-user-enviroments",
-          "containerPath": "/code/env",
+          "sourceVolume": "enviroments_volume",
+          "containerPath": "/code/envs",
           "readOnly": true
         }
       ]
@@ -113,8 +113,8 @@
       "memoryReservation": 256,
       "mountPoints": [
         {
-          "sourceVolume": "home-ec2-user-enviroments",
-          "containerPath": "/code/env",
+          "sourceVolume": "enviroments_volume",
+          "containerPath": "/code/envs",
           "readOnly": true
         }
       ]
