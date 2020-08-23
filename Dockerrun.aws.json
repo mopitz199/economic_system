@@ -14,7 +14,7 @@
       }
     },
     {
-      "name": "postgres_volume_backup",
+      "name": "postgres_backups",
       "host": {
         "sourcePath": "/efs/backups"
       }
@@ -60,7 +60,7 @@
           "containerPath": "/var/lib/postgresql/data"
         },
         {
-          "sourceVolume": "postgres_volume_backup",
+          "sourceVolume": "postgres_backups",
           "containerPath": "/backups"
         }
       ]
@@ -118,27 +118,6 @@
           "readOnly": true
         }
       ]
-    },
-    {
-      "name": "nginx",
-      "image": "mopitz/backend-nginx",
-      "hostname": "nginx",
-      "essential": false,
-      "memoryReservation": 56,
-      "mountPoints": [
-        {
-          "sourceVolume": "static_files",
-          "containerPath": "/static_files",
-          "readOnly": true
-        }
-      ],
-      "portMappings": [
-        {
-          "containerPort": 80,
-          "hostPort": 8000
-        }
-      ],
-      "links": ["api"]
     },
     {
       "name": "caddy",
