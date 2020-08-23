@@ -89,7 +89,7 @@
     },
     {
       "name": "jupyter",
-      "image": "backend-jupyter",
+      "image": "mopitz/backend-jupyter",
       "hostname": "jupyter",
       "essential": false,
       "command": ["python", "manage.py", "shell_plus", "--notebook"],
