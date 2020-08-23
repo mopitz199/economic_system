@@ -14,7 +14,7 @@ app_headers = {
     'Authorization': 'Token '+os.environ['COINMARKETCAP_TOKEN'],
     'Content-Type': 'application/json'
 }
-host = '68.183.27.16:9000'
+host = 'eb.economicapp.io'
 coinmarketcap_host = os.environ['COINMARKETCAP_HOST']
 
 elements_per_chunk = 98

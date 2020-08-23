@@ -88,6 +88,28 @@
       ]
     },
     {
+      "name": "jupyter",
+      "image": "backend-jupyter",
+      "hostname": "jupyter",
+      "essential": false,
+      "command": ["python", "manage.py", "shell_plus", "--notebook"],
+      "links": ["db"],
+      "memoryReservation": 640,
+      "portMappings": [
+        {
+          "containerPort": 8888,
+          "hostPort": 8888
+        }
+      ],
+      "mountPoints": [
+        {
+          "sourceVolume": "enviroments_volume",
+          "containerPath": "/code/envs",
+          "readOnly": true
+        }
+      ]
+    },
+    {
       "name": "celery",
       "image": "mopitz/backend-app",
       "hostname": "celery",

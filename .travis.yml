@@ -6,6 +6,7 @@ services:
 
 after_success:
   - docker build -t mopitz/backend-app -f ./dockers/prod/web/Dockerfile .
+  - docker build -t mopitz/backend-jupyter -f ./dockers/prod/jupyter/Dockerfile .
   - docker build -t mopitz/backend-nginx -f ./dockers/prod/nginx/Dockerfile .
   - docker build -t mopitz/backend-nginx-proxy -f ./dockers/prod/nginx-proxy/Dockerfile .
   - docker build -t mopitz/backend-caddy -f ./dockers/prod/caddy/Dockerfile .
@@ -16,6 +17,7 @@ after_success:
   - docker push mopitz/backend-nginx-proxy
   - docker push mopitz/backend-caddy
   - docker push mopitz/backend-redis
+  - docker push mopitz/backend-jupyter
 
 before_deploy:
   - zip -r economicapp-backend.zip Dockerrun.aws.json .ebextensions

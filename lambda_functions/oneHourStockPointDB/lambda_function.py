@@ -18,7 +18,7 @@ app_headers = {
     'Authorization': 'Token 26704736d3a5c8712dc149fb67643608f0397267',
     'Content-Type': 'application/json'
 }
-host = '68.183.27.16:9000'
+host = 'eb.economicapp.io'
 
 
 def get_file(file_name, bucket_name):
