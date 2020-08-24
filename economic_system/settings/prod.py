@@ -1,9 +1,6 @@
 from economic_system.settings.base import *
 
 # Env file
-env = environ.Env()
-env_file = os.path.join(BASE_DIR, "../envs", ".env")
-environ.Env.read_env(env_file)
 
 SECRET_KEY = env('SECRET_KEY')
 
