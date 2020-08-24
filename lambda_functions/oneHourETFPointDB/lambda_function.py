@@ -63,7 +63,7 @@ def lambda_handler(event, context):
             })
 
         requests.post(
-            f'http://{host}/api/chart/point/bulk-points-without-chart/',
+            f'https://{host}/api/chart/point/bulk-points-without-chart/',
             json={
                 'points': points
             },

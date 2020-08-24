@@ -58,7 +58,7 @@ def lambda_handler(event, context):
                 })
 
             requests.post(
-                f'http://{host}/api/stock/add-multiple-diluted-eps/',
+                f'https://{host}/api/stock/add-multiple-diluted-eps/',
                 json={
                     'diluted_eps_data': all_diluted_eps_data
                 },

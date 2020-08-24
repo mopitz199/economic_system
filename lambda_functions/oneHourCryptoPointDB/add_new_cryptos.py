@@ -32,7 +32,7 @@ def _chunks(list_data, elements_per_chunk):
 
 def _get_coinmarketcap_ids():
     response = requests.get(
-        f'http://{host}/api/asset/coinmarketcap-ids/',
+        f'https://{host}/api/asset/coinmarketcap-ids/',
         headers=app_headers
     )
     data = _process_response(response)
@@ -132,7 +132,7 @@ def _get_coins_info(ids):
 
 def _create_complete_crypto_asset(data):
     response = requests.post(
-        f'http://{host}/api/asset/complete-crypto-asset/',
+        f'https://{host}/api/asset/complete-crypto-asset/',
         json=data,
         headers=app_headers
     )
@@ -156,7 +156,7 @@ def _get_diff(list1, list2):
 
 def _create_chart(id):
     response = requests.post(
-        f'http://{host}/api/chart/charts/',
+        f'https://{host}/api/chart/charts/',
         json={
             "asset": id,
             "time_frame": "1h",
@@ -192,7 +192,7 @@ def _create_cryptos(data):
 
 def _mapping_charts():
     response = requests.get(
-        f'http://{host}/api/chart/charts/?limit=5000&chart_type=point&time_frame=1h&asset__asset_type=cryptos',
+        f'https://{host}/api/chart/charts/?limit=5000&chart_type=point&time_frame=1h&asset__asset_type=cryptos',
         headers=app_headers
     )
     chart_data = _process_response(response)
@@ -238,7 +238,7 @@ def run():
         all_points.append(point)
 
     requests.post(
-        f'http://{host}/api/chart/point/bulk-points/',
+        f'https://{host}/api/chart/point/bulk-points/',
         json={
             'points': all_points
         },
