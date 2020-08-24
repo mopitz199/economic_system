@@ -6,5 +6,6 @@ RUN mkdir /code
 WORKDIR /code
 COPY ./ /code/
 ENV DJANGO_SETTINGS_MODULE=economic_system.settings.jupyter_dev
+ENV ENVIRONMENT=dev
 RUN pip install --upgrade pip
 RUN pip install -r requirements/dev.txt

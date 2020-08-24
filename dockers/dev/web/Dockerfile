@@ -9,3 +9,4 @@ RUN pip install --upgrade pip
 RUN pip install -r dev.txt
 COPY ./ ./
 ENV DJANGO_SETTINGS_MODULE=economic_system.settings.dev
+ENV ENVIRONMENT=dev
